@@ -29,8 +29,6 @@
           g = s(783), //HTML
           y = s.n(g); //返回HTML
 
-        // var tttt = self.testForCustomer  // Just Test  AWEN 2024.01.16
-
         class AsteroidsApp extends i.BaseApp {
           constructor() {
             super(r.Types),
@@ -74,8 +72,9 @@
             ]);
           }
           async setUpScene() {
-            // tttt('hello', 'awen', 'lvyu!')  //测试一下导入外部js逻辑
-            console.log(o.THREE.REVISION); //使用的是three.js r 154
+            var tttt = window.testForCustomer  // Just Test  AWEN 2024.01.16
+            tttt('hello', 'awen', 'lvyu!')  //测试一下导入外部js逻辑
+            console.log(o.THREE.REVISION);  //使用的是three.js r 154
             this._neos = await r.NEOUtils.loadNEOs(this.pioneer);
             const t = this.getManager("label");
             (t._iconMap.Asteroid = "asteroid"),

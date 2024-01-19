@@ -10,10 +10,13 @@ import {
   RGBELoader
 } from 'https://cdn.jsdelivr.net/npm/three@0.119.1/examples/jsm/loaders/RGBELoader.js';
 
+import mitt from 'mitt';
+
 var container, stats, controls;
 var camera, scene, renderer;
 
 var raycaster, mouse;
+var rect = {width:400, height:300};
 
 init();
 render();
@@ -21,8 +24,9 @@ render();
 function init() {
 
   container = document.getElementById('three');
+  
   // document.body.appendChild(container);
-  const rect = container.getBoundingClientRect();
+
   camera = new THREE.PerspectiveCamera(45, rect.width / rect.height, 0.25, 20);
   camera.position.set(-1.8, 0.9, 2.7);
 
@@ -93,12 +97,11 @@ function init() {
 
 }
 
-function onClick() {
-
+function onClick(event) {
   event.preventDefault();
 
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  mouse.x = (event.offsetX / rect.width) * 2 - 1;
+  mouse.y = -(event.offsetY / rect.height) * 2 + 1;
 
   raycaster.setFromCamera(mouse, camera);
 
@@ -109,6 +112,7 @@ function onClick() {
 		var object = intersects[0].object;
 
     object.material.color.set( Math.random() * 0xffffff );
+    window.EventBus_.emit('TOPIC2', {mouseX: mouse.x, mouseY: mouse.y});
 
   }
 	
@@ -118,10 +122,10 @@ function onClick() {
 
 function onWindowResize() {
 
-  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.aspect = rect.width / rect.height;
   camera.updateProjectionMatrix();
 
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(rect.width, rect.height);
   
   render();
 
@@ -135,7 +139,15 @@ function render() {
 }
 
 
-(self.testForCustomer = function greet(greeting, name, surname) {
-  console.log(this);
-  console.log(`${greeting}, ${name}, ${surname}!`);
-});
+(
+  window.EventBus_ = mitt(),
+  window.testForCustomer = function greet(greeting, name, surname) {
+    console.log(this);
+    console.log(`${greeting}, ${name}, ${surname}!`);
+  }
+)
+(
+  window.EventBus_.on('TOPIC', (e)=>{
+    console.log('extend.js ');
+  })
+)

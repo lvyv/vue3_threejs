@@ -1,5 +1,5 @@
 <template>
-  <div class="item">
+  <div :style="componentStyle" class="item">
     <i>
       <slot name="icon"></slot>
     </i>
@@ -11,6 +11,43 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import { reactive, computed, ref } from 'vue';
+
+const data = reactive({
+  positionX: 100,
+  positionY: 100,
+});
+
+// 定义css供template调用
+const componentStyle = computed(() => ({
+  position: 'absolute',
+  left: `${data.positionX}px`,
+  top: `${data.positionY}px`,
+}));
+
+
+// 定义可供其他组件调用的方法, defineExpose在最后
+const myMethod = () => {
+  console.log('这是一个可供其他组件调用的方法');
+};
+
+
+const moveStep = (deltaX, deltaY) => {
+  let setupx = (deltaX === undefined) ? 10 : deltaX;
+  let setupy = (deltaY === undefined) ? 10 : deltaY;
+
+  data.positionX += setupx; // 或者任何你想要的改变位置的逻辑
+  data.positionY += setupy;
+};
+
+defineExpose({
+  myMethod,
+  moveStep,
+});
+
+</script>
 
 <style scoped>
 .item {
