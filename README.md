@@ -1,16 +1,8 @@
 # vue3_threejs
 A vue3 and threejs app framework.
-This framework should help get you started developing with Vue 3 in Vite.
+This framework should help get you started developing web 3d application with Vue 3 and threejs in Vite.
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+## 1. Project Setup
 
 ```sh
 npm install
@@ -27,3 +19,10 @@ npm run dev
 ```sh
 npm run build
 ```
+
+## 2. 技术说明  
+本项目采用mitt作为threejs app与vue app之间的数据交互的通道。  
+项目计划：  
+（1）blender制作osm城市地图带白模；  
+（2）threejs载入场景；  
+（3）app与threejs交互呈现图表及各种数据库操作。

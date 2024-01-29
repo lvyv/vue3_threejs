@@ -22,12 +22,10 @@ const minimize = () => {
 };
 const moveStep = () => {
   welcomeItem.value.moveStep();
-  welcomeItem2.value.myMethod();
   window.EventBus_.emit('TOPIC', { x: 3, y: 3 });
 };
 // 定义子组件
 const welcomeItem = ref();
-const welcomeItem2 = ref();
 
 const evt_handler = (type, e) => {
   // console.log(type);
@@ -57,10 +55,8 @@ onUnmounted(() => {
     <template #icon>
       <DocumentationIcon />
     </template>
-    <template #heading>Documentation</template>
-    <a href="https://vuejs.org/" target="_blank" rel="noopener">official documentation</a>
-    provides you with all information you need to get started.
-  </WelcomeItem>
-  <WelcomeItem ref="welcomeItem2">
+    <template #heading>标题</template>
+    <a href="https://vuejs.org/" target="_blank" rel="noopener">具体内容</a>
+    详细信息：提供具体的内容，显示点击对象的描述信息。
   </WelcomeItem>
 </template>

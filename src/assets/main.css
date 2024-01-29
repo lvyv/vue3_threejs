@@ -41,7 +41,11 @@ a,
   height: 300px;
   z-index: 20;
   position: relative;
-  background-color: #000;
+  top:300px;
+  left:-1500px;
+  background-color: #da1b1b;
 	margin: 0px;
 	overflow: hidden;
+  border-radius: 10px; /* 设置圆角半径 */
+  padding: 0px; /* 可选：添加内边距以增加内容与边框的距离 */
 }
